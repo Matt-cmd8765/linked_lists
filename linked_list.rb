@@ -1,9 +1,8 @@
 class LinkedList
-  attr_accessor :size, :head, :tail
+  attr_accessor :head
 
   def initialize
     @head = nil
-    @tail = nil
   end
 
   def append(data)
@@ -18,6 +17,35 @@ class LinkedList
       end
       current_node.next = new_node
     end
+  end
+
+  def prepend(data)
+    current_node = @head
+    node = Node.new(data)
+    node.next = current_node
+    @head = node
+  end
+
+  def size
+    count = 1
+    current_node = @head
+    while current_node.next != nil
+      current_node = current_node.next
+      count += 1
+    end
+    count
+  end
+
+  def header
+    puts "Head node value is #{@head.value} and the next value (pointer) is #{@head.next.value}"
+  end
+
+  def tail
+    current_node = @head
+    while current_node.next != nil
+      current_node = current_node.next
+    end
+    puts "The last value in the linked list is: #{current_node.value}"
   end
 end
 
@@ -34,4 +62,6 @@ end
 list = LinkedList.new
 list.append(5)
 list.append(6)
-puts list
+list.append(7)
+list.prepend(4)
+list.tail
