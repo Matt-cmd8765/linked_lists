@@ -47,6 +47,27 @@ class LinkedList
     end
     puts "The last value in the linked list is: #{current_node.value}"
   end
+
+  def at_index(index)
+    count = 1
+    current_node = @head
+    while count < index
+      current_node = current_node.next
+      count += 1
+    end
+    current_node
+  end
+
+  def pop
+    count = 1
+    current_node = @head
+    while current_node.next != nil
+      current_node = current_node.next
+      count += 1
+    end
+    current_node = self.at_index(count - 1)
+    current_node.next = nil
+  end 
 end
 
 class Node
@@ -64,4 +85,5 @@ list.append(5)
 list.append(6)
 list.append(7)
 list.prepend(4)
+list.pop
 list.tail
