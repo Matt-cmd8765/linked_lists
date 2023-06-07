@@ -9,7 +9,6 @@ Most methods use the
 
 ```
 current_node = @head
-    while current_node.next != nilcurrent_node = @head
     while current_node.next != nil
 
 ```
