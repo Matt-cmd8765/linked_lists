@@ -37,7 +37,7 @@ class LinkedList
   end
 
   def header
-    puts "Head node value is #{@head.value} and the next value (pointer) is #{@head.next.value}"
+    @head
   end
 
   def tail
@@ -45,11 +45,11 @@ class LinkedList
     while current_node.next != nil
       current_node = current_node.next
     end
-    puts "The last value in the linked list is: #{current_node.value}"
+    current_node
   end
 
   def at_index(index)
-    count = 1
+    count = 0
     current_node = @head
     while count < index
       current_node = current_node.next
@@ -59,7 +59,7 @@ class LinkedList
   end
 
   def pop
-    count = 1
+    count = 0
     current_node = @head
     while current_node.next != nil
       current_node = current_node.next
@@ -68,6 +68,46 @@ class LinkedList
     current_node = self.at_index(count - 1)
     current_node.next = nil
   end 
+
+  def contains?(number)
+    if @head.value == number
+      puts true
+    else
+      current_node = @head
+      while current_node.next != nil
+        current_node = current_node.next
+        if current_node.value == number
+          puts true
+          break
+        elsif current_node.next.nil?
+          puts false
+        end
+      end
+    end
+  end
+
+  def find(value)
+    count = 0
+    current_node = @head
+    while current_node.value != value
+      current_node = current_node.next
+      count += 1
+    end
+    puts count
+  end
+
+  def to_s
+    string = ""
+    current_node = @head
+    while current_node.next != nil
+      string.insert(-1, "(#{current_node.value})->")
+      current_node = current_node.next
+    end
+    string.insert(-1, "(#{current_node.value})->")
+    string.insert(-1, '(nil)')
+    puts string
+  end
+
 end
 
 class Node
@@ -79,11 +119,12 @@ class Node
   end
 end
 
-
 list = LinkedList.new
 list.append(5)
 list.append(6)
 list.append(7)
+list.append(8)
+list.append(9)
 list.prepend(4)
-list.pop
-list.tail
+list.prepend(3)
+list.to_s
